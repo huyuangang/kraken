@@ -1,0 +1,19 @@
+{
+  "name": "kraken",
+  "version": "0.0.1",
+  "description": "micros frontends core",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "index.js",
+    "src"
+  ],
+  "keywords": [
+    "micro",
+    "frontends"
+  ],
+  "author": "1730790894@qq.com",
+  "license": "ISC"
+}

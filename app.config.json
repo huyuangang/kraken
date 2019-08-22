@@ -1,0 +1,51 @@
+{
+    "app_id": "app",
+    "modules": [
+        {
+            "module_id": "banner",
+            "name": "banner",
+            "source": "http://127.0.0.1:4001/pages/home/index.js",
+            "container": "banner",
+            "path": "*"
+        },
+        {
+            "module_id": "navbar",
+            "name": "navbar",
+            "source": "http://127.0.0.1:4002/pages/home/index.js",
+            "container": "navbar",
+            "dependencies": ["banner"],
+            "path": "*"
+        },
+        {
+            "module_id": "app_module_1",
+            "name": "module1",
+            "source": "http://127.0.0.1:4003/pages/home/index.js",
+            "container": "module1",
+            "path": "/index",
+            "dependencies": ["banner", "navbar"],
+            "children": [
+                {
+                    "name": "首页",
+                    "path": ""
+                },
+                {
+                    "name": "关于",
+                    "path": "about"
+                },
+                {
+                    "name": "联系我们",
+                    "path": "contact"
+                }
+            ]
+        },
+        {
+            "module_id": "app_module_2",
+            "name": "module2",
+            "source": "http://127.0.0.1:4004/pages/home/index.js",
+            "text": "",
+            "container": "module2",
+            "dependencies": ["banner", "navbar"],
+            "path": "/module2"
+        }
+    ]
+}

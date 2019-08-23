@@ -2,11 +2,12 @@
 
 
 import manage from './src/manage';
-import * as navigate from './src/navigate';
+import * as router from './src/router';
+
 
 window.Kraken = {
     manage,
-    navigate
+    router
 };
 
 

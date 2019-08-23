@@ -1,5 +1,6 @@
 import Module from './module';
 import { isObject } from './helper/utils';
+import { init as routerInit } from './router.js';
 
 class Manage {
     constructor() {
@@ -9,6 +10,7 @@ class Manage {
     }
     run(config) {
         this.config = config;
+        routerInit(config);
         this.loadDefaultModule();
         this.loadCurrentModule();
     }

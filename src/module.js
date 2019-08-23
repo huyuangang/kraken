@@ -20,7 +20,6 @@ class Module {
         // 加载代码
         this.loadModule();
     }
-    
     async loadModule() {
         const { source, container } = this.config;
         const { loaded, render } = this;
@@ -28,7 +27,7 @@ class Module {
             return;
         }
         if (!render) {
-            const jsbundle = getSource(source);
+            const jsbundle = await getSource(source);
             this.render = new Function('require', 'exports', 'module', jsbundle);
         }
         // 判断依赖模块是否加载完成

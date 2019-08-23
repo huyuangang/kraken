@@ -1,28 +1,4 @@
 
-
-export default class Sandbox {
-    constructor(config) {
-        this.module_id = config.module_id;
-        this.windowSandbox = new WindowSandbox();
-        this.styleSandbox = new StyleSandbox();
-    }
-
-    beforeMount() {
-        this.windowSandbox.beforeMount();
-        this.styleSandbox.beforeMount();
-    }
-
-    mounted() {
-
-    }
-
-    beforeUnMount() {
-        this.windowSandbox.beforeUnMount();
-        this.styleSandbox.beforeUnMount();
-    }
-
-}
-
 class WindowSandbox {
     constructor() {
         this.orignalData = {};
@@ -68,7 +44,6 @@ class StyleSandbox {
     createFragment() {
         this.fragment = document.createFragment();
     }
-    
     //  模块加载之前
     beforeMount() {
         this.orignalStyle = document.querySelectorAll('head style');
@@ -81,7 +56,8 @@ class StyleSandbox {
     }
 
     beforeUnMount() {
-        this.cacheModuleStyle = Array.prototype.slice.call(document.querySelectorAll('head style'), (this.orignalStyle.length));
+        this.cacheModuleStyle = Array.prototype.slice.call(
+            document.querySelectorAll('head style'), (this.orignalStyle.length));
         this.cacheModuleStyle.map(item => {
             this.fragment.appendChild(item);
             // 移除模块的style
@@ -90,5 +66,27 @@ class StyleSandbox {
     }
 }
 
+export default class Sandbox {
+    constructor(config) {
+        this.module_id = config.module_id;
+        this.windowSandbox = new WindowSandbox();
+        this.styleSandbox = new StyleSandbox();
+    }
+
+    beforeMount() {
+        this.windowSandbox.beforeMount();
+        this.styleSandbox.beforeMount();
+    }
+
+    mounted() {
+
+    }
+
+    beforeUnMount() {
+        this.windowSandbox.beforeUnMount();
+        this.styleSandbox.beforeUnMount();
+    }
+
+}
 
 // export default Sandbox;

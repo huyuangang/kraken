@@ -1,10 +1,7 @@
 
 import * as utils from './helper/utils';
 
-const EVENT_MAP = {
-
-};
-
+const EVENT_MAP = {};
 /**
  *
  * @param {String} key
@@ -14,19 +11,38 @@ export function on(key, handler) {
     if (!utils.isFunction(handler)) {
         return;
     }
-    utils.isArray(EVENT_MAP[key]) ? EVENT_MAP[key].push(handler) : EVENT_MAP[key] = [handler];
+    if (!EVENT_MAP[key]) {
+        EVENT_MAP[key] = {
+            cache: false,
+            handlers: []
+        };
+    }
+    let currentEvent = EVENT_MAP[key];
+    currentEvent.cache ? handler(currentEvent.payload) : currentEvent.handlers.push(handler);
 }
 
 /**
  *
  * @param {String} key
  * @param {*} payload
+ * @param {Boolean} cache 事件是否缓存
  */
-export function emit(key, payload) {
-    if (!utils.isArray(EVENT_MAP[key])) {
-        return;
+export function emit(key, payload, cache = false) {
+    if (!EVENT_MAP[key]) {
+        EVENT_MAP[key] = {
+            cache,
+            payload,
+            handlers: []
+        };
     }
-    EVENT_MAP[key].map(item => item(payload));
+    if (payload !== undefined) {
+        EVENT_MAP[key].payload = payload;
+    }
+    if (typeof cache === 'boolean') {
+        EVENT_MAP[key].cache = cache;
+    }
+
+    EVENT_MAP[key].handlers.map(item => item(payload));
 }
 
 /**
